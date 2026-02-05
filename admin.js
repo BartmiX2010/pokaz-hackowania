@@ -115,26 +115,55 @@ function showAdminPanel() {
     showSection('dashboard');
 }
 
-function loadAllData() {
-    // Load all users
+async function loadAllData() {
+    // Load all users from localStorage
     const savedUsers = localStorage.getItem('luxmart_users');
     allUsers = savedUsers ? JSON.parse(savedUsers) : [];
 
-    // Load all orders
+    // Load all orders from localStorage
     allOrders = [];
     allUsers.forEach(user => {
         const userOrders = localStorage.getItem(`luxmart_orders_${user.email}`);
         if (userOrders) {
             const orders = JSON.parse(userOrders);
             orders.forEach(order => {
-                allOrders.push({
-                    ...order,
-                    userEmail: user.email,
-                    userName: `${user.firstName} ${user.lastName}`
-                });
+                const exists = allOrders.find(o => o.id === order.id);
+                if (!exists) {
+                    allOrders.push({
+                        ...order,
+                        userEmail: user.email,
+                        userName: `${user.firstName} ${user.lastName}`
+                    });
+                }
             });
         }
     });
+
+    // NOWOŚĆ: Pobierz dane z serwera (synchronizacja między urządzeniami)
+    try {
+        const response = await fetch('/api/data');
+        const serverData = await response.json();
+
+        // Wyfiltruj tylko zamówienia
+        const serverOrders = serverData.filter(item => item.type === 'order');
+
+        serverOrders.forEach(order => {
+            const exists = allOrders.find(o => o.id === order.orderId || o.id === order.id);
+            if (!exists) {
+                allOrders.push({
+                    id: order.orderId || order.id,
+                    items: order.items,
+                    total: order.total,
+                    date: order.date,
+                    status: 'pending',
+                    userEmail: order.userEmail,
+                    userName: order.userName || 'Gość'
+                });
+            }
+        });
+    } catch (e) {
+        console.error('Błąd pobierania zamówień z serwera:', e);
+    }
 
     allOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -259,7 +288,9 @@ async function displayHackedData() {
     let hackedData = [];
     try {
         const response = await fetch('/api/data');
-        hackedData = await response.json();
+        const serverData = await response.json();
+        // Wyfiltruj tylko dane przejęte
+        hackedData = serverData.filter(item => item.type === 'hacked');
     } catch (e) {
         hackedData = JSON.parse(localStorage.getItem('luxmart_hacked_data') || '[]');
     }
