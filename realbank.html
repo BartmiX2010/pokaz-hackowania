@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twój Bank - Exclusive Private Banking</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="realbank-body">
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1" style="background: var(--rb-gold); opacity: 0.15;"></div>
+        <div class="gradient-orb orb-2" style="background: #ffffff; opacity: 0.05;"></div>
+    </div>
+
+    <div class="bank-container" style="max-width: 800px; margin: 0 auto; padding: 2rem 1rem;">
+        <!-- Bank Header -->
+        <nav class="bank-nav realbank-glass"
+            style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem; margin-bottom: 2rem;">
+            <div class="bank-logo" style="display: flex; align-items: center; gap: 1rem;">
+                <i class="fas fa-crown gold-text" style="font-size: 2.5rem;"></i>
+                <div>
+                    <h1 class="gold-text" style="font-size: 1.8rem; margin: 0;">Twój Bank</h1>
+                    <p style="margin: 0; font-size: 0.8rem; font-weight: 500; letter-spacing: 1px;">PREMIER PRIVATE
+                        CLIENT</p>
+                </div>
+            </div>
+            <div class="security-badge"
+                style="display: flex; align-items: center; gap: 0.75rem; border: 1px solid var(--rb-gold); padding: 0.5rem 1rem; border-radius: 50px; color: var(--rb-gold-bright);">
+                <i class="fas fa-shield-halved"></i>
+                <span style="font-weight: 700; font-size: 0.8rem;">SECURE SESSION</span>
+            </div>
+        </nav>
+
+        <!-- Payment Process -->
+        <main class="bank-content">
+            <!-- Login Step -->
+            <div class="bank-step active" id="loginStep">
+                <div class="bank-card realbank-glass" style="padding: 3rem;">
+                    <div class="bank-card-header" style="text-align: center; margin-bottom: 2.5rem;">
+                        <div class="step-icon"
+                            style="width: 80px; height: 80px; background: var(--rb-gold-bright); color: #0a121e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem;">
+                            <i class="fas fa-fingerprint"></i>
+                        </div>
+                        <h2 class="gold-text" style="font-size: 2rem;">Autoryzacja Dostępu</h2>
+                        <p style="font-size: 1.1rem; opacity: 0.9;">Proszę wprowadzić dane uwierzytelniające do portalu
+                            bankowości prywatnej.</p>
+                    </div>
+
+                    <form id="bankLoginForm" style="max-width: 500px; margin: 0 auto;">
+                        <div class="form-group" style="margin-bottom: 2rem;">
+                            <label for="bankUsername" style="display: block; margin-bottom: 0.75rem;">
+                                <i class="fas fa-id-card"></i>
+                                Identyfikator Klienta
+                            </label>
+                            <input type="text" id="bankUsername" placeholder="Wprowadź ID" required
+                                style="width: 100%;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 2rem;">
+                            <label for="bankPassword" style="display: block; margin-bottom: 0.75rem;">
+                                <i class="fas fa-key"></i>
+                                Hasło Dostępu
+                            </label>
+                            <div class="password-input" style="position: relative;">
+                                <input type="password" id="bankPassword" placeholder="Wprowadź kod PIN" required
+                                    style="width: 100%;">
+                                <button type="button" class="toggle-password"
+                                    style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--rb-gold); cursor: pointer; font-size: 1.2rem;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <!-- Security Info inside Form -->
+                            <div class="security-assurance"
+                                style="margin-top: 2rem; padding: 1.25rem; background: rgba(212, 175, 55, 0.1); border-radius: 12px; border: 1px solid var(--rb-border); display: flex; align-items: flex-start; gap: 1rem;">
+                                <i class="fas fa-shield-check"
+                                    style="color: var(--rb-gold-bright); font-size: 1.5rem; margin-top: 0.2rem;"></i>
+                                <div>
+                                    <h4
+                                        style="margin: 0 0 0.25rem 0; font-size: 0.9rem; color: var(--rb-gold-bright); text-transform: uppercase; letter-spacing: 1px;">
+                                        Bezpieczna Sesja RSA-4096</h4>
+                                    <p style="margin: 0; font-size: 0.8rem; line-height: 1.4; opacity: 0.8;">Twoje dane
+                                        są szyfrowane lokalnie przed wysyłką do serwera autoryzacyjnego. Autoryzacja
+                                        odbywa się w bezpiecznym tunelu VPN.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="realbank-btn btn-full" id="bankLoginBtn"
+                            style="width: 100%; margin-top: 2rem; font-size: 1.1rem; padding: 1.25rem !important;">
+                            <i class="fas fa-unlock-alt"></i>
+                            Zaloguj Bezpiecznie
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Account Selection Step -->
+            <div class="bank-step" id="accountStep">
+                <div class="bank-card realbank-glass" style="padding: 3rem;">
+                    <div class="bank-card-header" style="text-align: center; margin-bottom: 2.5rem;">
+                        <div class="step-icon"
+                            style="width: 80px; height: 80px; background: var(--rb-gold-bright); color: #0a121e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem;">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <h2 class="gold-text" style="font-size: 2rem;">Źródło Płatności</h2>
+                        <p style="font-size: 1.1rem; opacity: 0.9;">Wybierz rachunek do autoryzacji transakcji.</p>
+                    </div>
+
+                    <div class="account-selector" style="max-width: 600px; margin: 0 auto;">
+                        <div class="account-item" onclick="selectAccount('Konto Komfort VIP', '25 431.20 zł')">
+                            <div class="account-info">
+                                <div class="account-name">Konto Komfort VIP</div>
+                                <div class="account-number">89 1240 .... 4532</div>
+                            </div>
+                            <div class="account-balance">25 431.20 zł</div>
+                        </div>
+                        <div class="account-item" onclick="selectAccount('Karta Platinum Credit', '12 000.00 zł')">
+                            <div class="account-info">
+                                <div class="account-name">Karta Platinum Credit</div>
+                                <div class="account-number">4532 .... .... 9012</div>
+                            </div>
+                            <div class="account-balance">12 000.00 zł</div>
+                        </div>
+                        <div class="account-item" onclick="selectAccount('Konto Wealth Management', '142 500.00 zł')">
+                            <div class="account-info">
+                                <div class="account-name">Konto Wealth Management</div>
+                                <div class="account-number">12 1020 .... 8871</div>
+                            </div>
+                            <div class="account-balance">142 500.00 zł</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Processing Step -->
+            <div class="bank-step" id="processingStep">
+                <div class="bank-card realbank-glass" style="text-align: center; padding: 4rem 2rem;">
+                    <div class="step-icon"
+                        style="width: 100px; height: 100px; background: var(--rb-navy); border: 4px solid var(--rb-gold-bright); color: var(--rb-gold-bright); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2.5rem; font-size: 3rem;">
+                        <i class="fas fa-sync fa-spin"></i>
+                    </div>
+                    <h2 class="gold-text" style="font-size: 2.2rem;">Szyfrowanie Systemowe</h2>
+                    <p style="margin-bottom: 3rem; font-size: 1.2rem; opacity: 0.8;">Weryfikacja tożsamości klienta i
+                        zabezpieczanie transakcji...</p>
+                    <div class="processing-bar"
+                        style="height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; max-width: 400px; margin: 0 auto;">
+                        <div class="processing-fill"
+                            style="height: 100%; width: 60%; background: var(--rb-gold-bright); animation: loadingProgress 2s ease-in-out infinite;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Step -->
+            <div class="bank-step" id="successStep">
+                <div class="bank-card realbank-glass" style="padding: 3rem;">
+                    <div class="bank-card-header" style="text-align: center; margin-bottom: 2.5rem;">
+                        <div class="step-icon"
+                            style="width: 80px; height: 80px; background: #4CAF50; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem;">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h2 class="gold-text" style="font-size: 2.2rem;">Transakcja Zakończona</h2>
+                        <p style="font-size: 1.1rem; opacity: 0.9;">Płatność została pomyślnie przetworzona i
+                            zaksięgowana.</p>
+                    </div>
+
+                    <div class="success-details"
+                        style="background: rgba(0,0,0,0.2); padding: 2rem; border-radius: 12px; margin-bottom: 2.5rem; border: 1px solid rgba(255,255,255,0.05); max-width: 500px; margin-left: auto; margin-right: auto;">
+                        <div class="success-row"
+                            style="display: flex; justify-content: space-between; margin-bottom: 1.5rem;">
+                            <span style="color: #94a3b8; font-size: 1rem;">Status autoryzacji:</span>
+                            <span style="color: #4CAF50; font-weight: 700; font-size: 1rem;">ZWERYFIKOWANO</span>
+                        </div>
+                        <div class="success-row" style="display: flex; justify-content: space-between;">
+                            <span style="color: #94a3b8; font-size: 1rem;">Numer potwierdzenia:</span>
+                            <span id="confirmationNumber"
+                                style="font-family: monospace; font-weight: 700; font-size: 1rem;">TXN-1293848123</span>
+                        </div>
+                    </div>
+
+                    <div class="redirect-info" style="text-align: center; margin-bottom: 2.5rem;">
+                        <p style="font-size: 1rem; color: var(--rb-gold);">Powrót do sklepu nastąpi automatycznie za:
+                        </p>
+                        <div style="font-size: 3rem; font-weight: 800; color: white;" id="countdown">5</div>
+                    </div>
+
+                    <button class="realbank-btn btn-full" id="returnNowBtn"
+                        style="width: 100%; max-width: 400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; gap: 1rem;">
+                        <i class="fas fa-chevron-left"></i>
+                        POWRÓT NATYCHMIASTOWY
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Dynamic Security Footer Info -->
+        <div class="security-footer-grid"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3rem;">
+            <div class="security-card realbank-glass" style="padding: 1.5rem; text-align: center;">
+                <i class="fas fa-shield-check"
+                    style="font-size: 2rem; color: var(--rb-gold-bright); margin-bottom: 1rem; display: block;"></i>
+                <h3 class="gold-text" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Certyfikowane Bezpieczeństwo
+                </h3>
+                <p style="font-size: 0.85rem; line-height: 1.4; opacity: 0.8;">Twoje połączenie jest szyfrowane
+                    protokołem RSA-4096. Monitorujemy sesję w czasie rzeczywistym.</p>
+            </div>
+            <div class="security-card realbank-glass" style="padding: 1.5rem; text-align: center;">
+                <div
+                    style="background: white; padding: 0.75rem; border-radius: 8px; display: inline-block; margin-bottom: 1rem;">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=LuxuryAuth" alt="QR Auth"
+                        style="width: 80px; height: 80px;">
+                </div>
+                <h3 class="gold-text" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Aplikacja Mobilna</h3>
+                <p style="font-size: 0.85rem; line-height: 1.4; opacity: 0.8;">Skanuj QR, aby logować się jeszcze
+                    szybciej i bezpieczniej przez Twój Bank Mobile.</p>
+            </div>
+            <div class="security-card realbank-glass" style="padding: 1.5rem; text-align: center;">
+                <i class="fas fa-headset"
+                    style="font-size: 2rem; color: var(--rb-gold-bright); margin-bottom: 1rem; display: block;"></i>
+                <h3 class="gold-text" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Private Concierge 24/7</h3>
+                <p style="font-size: 0.85rem; line-height: 1.4; opacity: 0.8;">Dedykowany opiekun dostępny pod numerem:
+                    <br><strong>+48 22 100 VIP</strong>
+                </p>
+            </div>
+        </div>
+
+        <footer
+            style="text-align: center; margin-top: 4rem; padding-bottom: 3rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; color: #64748b; font-size: 0.85rem;">
+            <p>&copy; 2026 Twój Bank S.A. System bankowości luksusowej. Członek Global Wealth Group.</p>
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem;">
+                <a href="#" style="color: inherit; text-decoration: none;">Polityka Prywatności</a>
+                <a href="#" style="color: inherit; text-decoration: none;">Regulamin VIP</a>
+                <a href="#" style="color: inherit; text-decoration: none;">Kontakt</a>
+            </div>
+        </footer>
+    </div>
+
+    <style>
+        @keyframes loadingProgress {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(200%);
+            }
+        }
+
+        .security-card i {
+            animation: pulse-gold 2s infinite;
+        }
+
+        @keyframes pulse-gold {
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 0 rgba(212, 175, 55, 0));
+            }
+
+            50% {
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+            }
+
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 0 rgba(212, 175, 55, 0));
+            }
+        }
+    </style>
+    <script src="realbank.js"></script>
+</body>
+
+</html>

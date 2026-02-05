@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LuxMart - Premium sklep internetowy z najlepszymi produktami">
+    <title>LuxMart - Premium Sklep</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Animowane tło -->
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Nawigacja -->
+    <nav class="main-nav glass-effect">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-gem"></i>
+                <span>LuxMart</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" data-page="home">
+                    <i class="fas fa-home"></i>
+                    <span>Strona Główna</span>
+                </a>
+                <a href="#" class="nav-link" data-page="products">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Produkty</span>
+                </a>
+                <a href="#" class="nav-link" data-page="user">
+                    <i class="fas fa-user"></i>
+                    <span>Panel Użytkownika</span>
+                </a>
+            </div>
+            <div class="nav-actions">
+                <div class="cart-icon" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <button class="btn-primary" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Zaloguj się</span>
+                </button>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu glass-effect" id="mobileMenu">
+        <a href="#" class="mobile-link" data-page="home">
+            <i class="fas fa-home"></i> Strona Główna
+        </a>
+        <a href="#" class="mobile-link" data-page="products">
+            <i class="fas fa-shopping-bag"></i> Produkty
+        </a>
+        <a href="#" class="mobile-link" data-page="user">
+            <i class="fas fa-user"></i> Panel Użytkownika
+        </a>
+    </div>
+
+    <!-- Główna zawartość -->
+    <main class="main-content">
+        <!-- Strona Główna -->
+        <section class="page active" id="homePage">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-star"></i>
+                        <span>Premium Experience</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Odkryj Świat
+                        <span class="gradient-text">Luksusu</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Najwyższej jakości produkty, ekskluzywne oferty i wyjątkowe doświadczenie zakupowe. Dołącz do
+                        naszej społeczności klientów premium.
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary btn-large" data-page="products">
+                            <i class="fas fa-shopping-bag"></i>
+                            Przeglądaj Produkty
+                        </button>
+                        <button class="btn-secondary btn-large" id="heroRegisterBtn">
+                            <i class="fas fa-user-plus"></i>
+                            Dołącz do Nas
+                        </button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">50K+</span>
+                            <span class="stat-label">Klientów</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">1000+</span>
+                            <span class="stat-label">Produktów</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">99%</span>
+                            <span class="stat-label">Zadowolonych</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="floating-card card-1 glass-effect">
+                        <i class="fas fa-crown"></i>
+                        <span>VIP Access</span>
+                    </div>
+                    <div class="floating-card card-2 glass-effect">
+                        <i class="fas fa-percent"></i>
+                        <span>-30% VIP</span>
+                    </div>
+                    <div class="floating-card card-3 glass-effect">
+                        <i class="fas fa-truck"></i>
+                        <span>Free Delivery</span>
+                    </div>
+                    <div class="hero-image-container">
+                        <div class="hero-glow"></div>
+                        <div class="hero-shapes">
+                            <div class="shape shape-1"></div>
+                            <div class="shape shape-2"></div>
+                            <div class="shape shape-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Products -->
+            <div class="featured-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-fire"></i>
+                        Polecane Produkty
+                    </h2>
+                    <a href="#" class="view-all-link" data-page="products">
+                        Zobacz wszystkie <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="featured-grid" id="featuredProducts">
+                    <!-- Produkty będą dodane przez JS -->
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="features-section">
+                <div class="feature-card glass-effect">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>Darmowa Dostawa</h3>
+                    <p>Przy zamówieniach powyżej 200 zł</p>
+                </div>
+                <div class="feature-card glass-effect">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Bezpieczne Płatności</h3>
+                    <p>256-bit SSL encryption</p>
+                </div>
+                <div class="feature-card glass-effect">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h3>30 Dni na Zwrot</h3>
+                    <p>Bez zadawania pytań</p>
+                </div>
+                <div class="feature-card glass-effect">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Wsparcie 24/7</h3>
+                    <p>Jesteśmy zawsze dla Ciebie</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strona Produktów -->
+        <section class="page" id="productsPage">
+            <div class="products-header">
+                <h1 class="page-title">
+                    <i class="fas fa-shopping-bag"></i>
+                    Nasze Produkty
+                </h1>
+                <div class="products-controls">
+                    <div class="search-box glass-effect">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Szukaj produktów...">
+                    </div>
+                    <div class="filter-controls">
+                        <select id="categoryFilter" class="filter-select glass-effect">
+                            <option value="all">Wszystkie Kategorie</option>
+                            <option value="electronics">Elektronika</option>
+                            <option value="fashion">Moda</option>
+                            <option value="home">Dom i Ogród</option>
+                            <option value="sport">Sport</option>
+                        </select>
+                        <select id="sortFilter" class="filter-select glass-effect">
+                            <option value="popular">Najpopularniejsze</option>
+                            <option value="price-low">Cena: rosnąco</option>
+                            <option value="price-high">Cena: malejąco</option>
+                            <option value="newest">Najnowsze</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Produkty będą dodane przez JS -->
+            </div>
+        </section>
+
+        <!-- Panel Użytkownika -->
+        <section class="page" id="userPage">
+            <div class="user-panel">
+                <div class="user-sidebar glass-effect">
+                    <div class="user-avatar">
+                        <div class="avatar-image">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="avatar-status online"></div>
+                    </div>
+                    <h3 class="user-name" id="userName">Gość</h3>
+                    <p class="user-email" id="userEmail">Zaloguj się, aby zobaczyć</p>
+                    <div class="user-menu">
+                        <button class="user-menu-item active" data-tab="profile">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Profil</span>
+                        </button>
+                        <button class="user-menu-item" data-tab="orders">
+                            <i class="fas fa-box"></i>
+                            <span>Zamówienia</span>
+                        </button>
+                        <button class="user-menu-item" data-tab="wishlist">
+                            <i class="fas fa-heart"></i>
+                            <span>Ulubione</span>
+                        </button>
+                        <button class="user-menu-item" data-tab="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>Ustawienia</span>
+                        </button>
+                    </div>
+                    <button class="btn-logout" id="logoutBtn" style="display: none;">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Wyloguj się</span>
+                    </button>
+                </div>
+                <div class="user-content glass-effect">
+                    <!-- Profile Tab -->
+                    <div class="user-tab active" id="profileTab">
+                        <h2 class="tab-title">
+                            <i class="fas fa-user-circle"></i>
+                            Mój Profil
+                        </h2>
+                        <div class="profile-info" id="profileInfo">
+                            <div class="info-placeholder">
+                                <i class="fas fa-user-lock"></i>
+                                <p>Zaloguj się, aby zobaczyć swój profil</p>
+                                <button class="btn-primary" id="profileLoginBtn">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    Zaloguj się
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Orders Tab -->
+                    <div class="user-tab" id="ordersTab">
+                        <h2 class="tab-title">
+                            <i class="fas fa-box"></i>
+                            Moje Zamówienia
+                        </h2>
+                        <div class="orders-list" id="ordersList">
+                            <div class="info-placeholder">
+                                <i class="fas fa-shopping-basket"></i>
+                                <p>Brak zamówień do wyświetlenia</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Wishlist Tab -->
+                    <div class="user-tab" id="wishlistTab">
+                        <h2 class="tab-title">
+                            <i class="fas fa-heart"></i>
+                            Moje Ulubione
+                        </h2>
+                        <div class="wishlist-grid" id="wishlistGrid">
+                            <div class="info-placeholder">
+                                <i class="fas fa-heart-broken"></i>
+                                <p>Nie masz jeszcze ulubionych produktów</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Settings Tab -->
+                    <div class="user-tab" id="settingsTab">
+                        <h2 class="tab-title">
+                            <i class="fas fa-cog"></i>
+                            Ustawienia
+                        </h2>
+                        <div class="settings-form">
+                            <div class="setting-group">
+                                <label class="setting-label">
+                                    <i class="fas fa-moon"></i>
+                                    Tryb Ciemny
+                                </label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="darkModeToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-group">
+                                <label class="setting-label">
+                                    <i class="fas fa-bell"></i>
+                                    Powiadomienia
+                                </label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="notificationsToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-group">
+                                <label class="setting-label">
+                                    <i class="fas fa-envelope"></i>
+                                    Newsletter
+                                </label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="newsletterToggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Logowania/Rejestracji -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-container glass-effect">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-content">
+                <!-- Login Form -->
+                <div class="auth-form active" id="loginForm">
+                    <div class="form-header">
+                        <div class="form-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h2>Witaj ponownie!</h2>
+                        <p>Zaloguj się do swojego konta</p>
+                    </div>
+                    <form id="loginFormElement">
+                        <div class="form-group">
+                            <label for="loginEmail">
+                                <i class="fas fa-envelope"></i>
+                                Email
+                            </label>
+                            <input type="email" id="loginEmail" placeholder="twoj@email.pl" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">
+                                <i class="fas fa-lock"></i>
+                                Hasło
+                            </label>
+                            <div class="password-input">
+                                <input type="password" id="loginPassword" placeholder="••••••••" required>
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox" id="rememberMe">
+                                <span>Zapamiętaj mnie</span>
+                            </label>
+                            <a href="#" class="forgot-password">Zapomniałeś hasła?</a>
+                        </div>
+                        <button type="submit" class="btn-primary btn-full">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Zaloguj się
+                        </button>
+                    </form>
+                    <div class="form-divider">
+                        <span>lub kontynuuj z</span>
+                    </div>
+                    <div class="social-login">
+                        <button class="social-btn google">
+                            <i class="fab fa-google"></i>
+                        </button>
+                        <button class="social-btn facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button class="social-btn apple">
+                            <i class="fab fa-apple"></i>
+                        </button>
+                    </div>
+                    <p class="form-switch">
+                        Nie masz konta? <a href="#" id="showRegister">Zarejestruj się</a>
+                    </p>
+                </div>
+
+                <!-- Register Form -->
+                <div class="auth-form" id="registerForm">
+                    <div class="form-header">
+                        <div class="form-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <h2>Dołącz do nas!</h2>
+                        <p>Stwórz swoje konto premium</p>
+                    </div>
+                    <form id="registerFormElement">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="registerFirstName">
+                                    <i class="fas fa-user"></i>
+                                    Imię
+                                </label>
+                                <input type="text" id="registerFirstName" placeholder="Jan" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="registerLastName">
+                                    <i class="fas fa-user"></i>
+                                    Nazwisko
+                                </label>
+                                <input type="text" id="registerLastName" placeholder="Kowalski" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">
+                                <i class="fas fa-envelope"></i>
+                                Email
+                            </label>
+                            <input type="email" id="registerEmail" placeholder="twoj@email.pl" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">
+                                <i class="fas fa-lock"></i>
+                                Hasło
+                            </label>
+                            <div class="password-input">
+                                <input type="password" id="registerPassword" placeholder="Min. 8 znaków" required>
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="password-strength" id="passwordStrength">
+                                <div class="strength-bar"></div>
+                                <span class="strength-text">Siła hasła</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerConfirmPassword">
+                                <i class="fas fa-lock"></i>
+                                Potwierdź Hasło
+                            </label>
+                            <div class="password-input">
+                                <input type="password" id="registerConfirmPassword" placeholder="Powtórz hasło"
+                                    required>
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox" id="acceptTerms" required>
+                                <span>Akceptuję <a href="#">regulamin</a> i <a href="#">politykę prywatności</a></span>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn-primary btn-full">
+                            <i class="fas fa-user-plus"></i>
+                            Zarejestruj się
+                        </button>
+                    </form>
+                    <p class="form-switch">
+                        Masz już konto? <a href="#" id="showLogin">Zaloguj się</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Checkout (Gość / Logowanie) -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-container glass-effect" style="max-width: 600px;">
+            <button class="modal-close" id="checkoutModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-content">
+                <div class="form-header">
+                    <div class="form-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h2>Finalizacja Zamówienia</h2>
+                    <p>Wybierz sposób kontynuacji</p>
+                </div>
+
+                <div class="checkout-tabs">
+                    <button class="tab-btn active" data-tab="guest">
+                        <i class="fas fa-user-clock"></i>
+                        Kup jako Gość
+                    </button>
+                    <button class="tab-btn" data-tab="login">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Zaloguj się
+                    </button>
+                </div>
+
+                <!-- Guest Form -->
+                <div class="checkout-tab-content active" id="guestCheckoutTab">
+                    <form id="guestCheckoutForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="guestFirstName">Imię</label>
+                                <input type="text" id="guestFirstName" placeholder="Jan" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="guestLastName">Nazwisko</label>
+                                <input type="text" id="guestLastName" placeholder="Kowalski" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="guestEmail">Email</label>
+                            <input type="email" id="guestEmail" placeholder="twoj@email.pl" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="guestAddress">Adres Dostawy</label>
+                            <textarea id="guestAddress" placeholder="ul. Sezamkowa 15/2, 00-001 Warszawa" required
+                                style="width: 100%; min-height: 80px; padding: 0.75rem; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary btn-full">
+                            <i class="fas fa-chevron-right"></i>
+                            Przejdź do Płatności
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Login Redirect Prompt -->
+                <div class="checkout-tab-content" id="loginCheckoutTab">
+                    <div class="info-placeholder">
+                        <i class="fas fa-user-circle"></i>
+                        <p>Zaloguj się, aby skorzystać ze swoich zapisanych danych i rabatów.</p>
+                        <button class="btn-primary" id="checkoutToLoginBtn">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Przejdź do Logowania
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Koszyk Sidebar -->
+    <div class="cart-overlay" id="cartOverlay">
+        <div class="cart-sidebar glass-effect" id="cartSidebar">
+            <div class="cart-header">
+                <h3>
+                    <i class="fas fa-shopping-cart"></i>
+                    Twój Koszyk
+                </h3>
+                <button class="cart-close" id="cartClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="cart-empty">
+                    <i class="fas fa-shopping-basket"></i>
+                    <p>Twój koszyk jest pusty</p>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Suma:</span>
+                    <span class="total-amount" id="cartTotal">0,00 zł</span>
+                </div>
+                <button class="btn-primary btn-full" id="checkoutBtn">
+                    <i class="fas fa-credit-card"></i>
+                    Przejdź do płatności
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

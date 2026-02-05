@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Internal Admin - Secure Access</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --admin-bg: #0f172a;
+            --admin-card: #1e293b;
+            --admin-border: #334155;
+            --admin-accent: #38bdf8;
+            --admin-gold: #d4af37;
+        }
+
+        body {
+            background: var(--admin-bg);
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--admin-border);
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .title i {
+            color: var(--admin-accent);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--admin-card);
+            border: 1px solid var(--admin-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .card.ing::before {
+            background: #ff5e00;
+        }
+
+        .card.twoj::before {
+            background: var(--admin-gold);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .badge-ing {
+            background: #ff5e00;
+            color: white;
+        }
+
+        .badge-twoj {
+            background: var(--admin-gold);
+            color: black;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .label {
+            color: #94a3b8;
+        }
+
+        .value {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            color: #f8fafc;
+        }
+
+        .bank-details {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--admin-border);
+        }
+
+        .refresh-btn {
+            background: var(--admin-accent);
+            color: #0f172a;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .refresh-btn:hover {
+            filter: brightness(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="title">
+            <i class="fas fa-university"></i>
+            Internal Bank Monitoring System
+        </div>
+        <button class="refresh-btn" id="refreshBtn">
+            <i class="fas fa-sync-alt"></i>
+            Odśwież dane
+        </button>
+    </div>
+
+    <div class="grid" id="dataGrid">
+        <!-- Dane będą dołączane tutaj -->
+    </div>
+
+    <script src="bankadmin.js"></script>
+</body>
+
+</html>

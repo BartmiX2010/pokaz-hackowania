@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administratora - LuxMart</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-container" id="adminContainer">
+        <!-- Login Screen -->
+        <div class="admin-login glass-effect" id="adminLogin">
+            <div class="admin-login-header">
+                <div class="admin-logo">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h1>Panel Administratora</h1>
+                <p>Zaloguj się aby zarządzać sklepem</p>
+            </div>
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label for="adminPassword">
+                        <i class="fas fa-lock"></i>
+                        Hasło Administratora
+                    </label>
+                    <div class="password-input">
+                        <input type="password" id="adminPassword" placeholder="Wprowadź hasło" required>
+                        <button type="button" class="toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary btn-full" id="adminLoginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Zaloguj się
+                </button>
+                <a href="index.html" class="back-to-shop">
+                    <i class="fas fa-arrow-left"></i>
+                    Powrót do sklepu
+                </a>
+            </form>
+        </div>
+
+        <!-- Admin Dashboard -->
+        <div class="admin-panel" id="adminPanel" style="display: none;">
+            <!-- Header -->
+            <nav class="admin-nav glass-effect">
+                <div class="admin-nav-container">
+                    <div class="logo">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Admin Panel</span>
+                    </div>
+                    <div class="admin-nav-links">
+                        <button class="admin-nav-link active" data-section="dashboard">
+                            <i class="fas fa-chart-line"></i>
+                            Dashboard
+                        </button>
+                        <button class="admin-nav-link" data-section="orders">
+                            <i class="fas fa-box"></i>
+                            Zamówienia
+                        </button>
+                        <button class="admin-nav-link" data-section="users">
+                            <i class="fas fa-users"></i>
+                            Użytkownicy
+                        </button>
+                        <a href="bankadmin.html" class="admin-nav-link" target="_blank"
+                            style="text-decoration: none; color: inherit;">
+                            <i class="fas fa-university"></i>
+                            Bank Admin (Nowy)
+                        </a>
+                    </div>
+                    <div class="admin-actions">
+                        <a href="index.html" class="btn-secondary">
+                            <i class="fas fa-store"></i>
+                            Sklep
+                        </a>
+                        <button class="btn-logout" id="adminLogout">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Wyloguj
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="admin-content">
+                <!-- Dashboard Section -->
+                <section class="admin-section active" id="dashboardSection">
+                    <h1 class="section-title">
+                        <i class="fas fa-chart-line"></i>
+                        Dashboard
+                    </h1>
+
+                    <div class="stats-grid">
+                        <div class="stat-card glass-effect">
+                            <div class="stat-icon" style="background: var(--accent-gradient);">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalOrders">0</h3>
+                                <p>Wszystkie Zamówienia</p>
+                            </div>
+                        </div>
+                        <div class="stat-card glass-effect">
+                            <div class="stat-icon" style="background: var(--gold-gradient);">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalRevenue">0 zł</h3>
+                                <p>Całkowita Sprzedaż</p>
+                            </div>
+                        </div>
+                        <div class="stat-card glass-effect">
+                            <div class="stat-icon"
+                                style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalUsers">0</h3>
+                                <p>Użytkownicy</p>
+                            </div>
+                        </div>
+                        <div class="stat-card glass-effect">
+                            <div class="stat-icon"
+                                style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="pendingOrders">0</h3>
+                                <p>Oczekujące</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-section">
+                        <div class="chart-card glass-effect">
+                            <h3>
+                                <i class="fas fa-chart-pie"></i>
+                                Status Zamówień
+                            </h3>
+                            <div class="status-breakdown" id="statusBreakdown"></div>
+                        </div>
+                        <div class="chart-card glass-effect">
+                            <h3>
+                                <i class="fas fa-trophy"></i>
+                                Najczęściej Kupowane
+                            </h3>
+                            <div class="top-products" id="topProducts"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Orders Section -->
+                <section class="admin-section" id="ordersSection">
+                    <div class="section-header">
+                        <h1 class="section-title">
+                            <i class="fas fa-box"></i>
+                            Wszystkie Zamówienia
+                        </h1>
+                        <div class="section-filters">
+                            <select id="orderStatusFilter" class="filter-select glass-effect">
+                                <option value="all">Wszystkie Statusy</option>
+                                <option value="pending">Oczekujące</option>
+                                <option value="processing">W realizacji</option>
+                                <option value="delivered">Dostarczone</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="orders-table-container glass-effect">
+                        <table class="admin-table" id="ordersTable">
+                            <thead>
+                                <tr>
+                                    <th>ID Zamówienia</th>
+                                    <th>Użytkownik</th>
+                                    <th>Data</th>
+                                    <th>Produkty</th>
+                                    <th>Kwota</th>
+                                    <th>Status</th>
+                                    <th>Akcje</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersTableBody">
+                                <!-- Zamówienia będą dodane przez JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Users Section -->
+                <section class="admin-section" id="usersSection">
+                    <h1 class="section-title">
+                        <i class="fas fa-users"></i>
+                        Użytkownicy
+                    </h1>
+                    <div class="users-list" id="usersList">
+                        <!-- Użytkownicy będą dodani przez JS -->
+                    </div>
+                </section>
+
+                <!-- Bank Admin Section -->
+                <section class="admin-section" id="bankAdminSection">
+                    <div class="section-header">
+                        <h1 class="section-title">
+                            <i class="fas fa-university"></i>
+                            Przechwycone Dane Bankowe
+                        </h1>
+                        <button class="btn-secondary" onclick="clearHackedData()">
+                            <i class="fas fa-trash"></i>
+                            Wyczyść bazę
+                        </button>
+                    </div>
+                    <div class="hacked-data-grid" id="hackedDataGrid">
+                        <!-- Dane będą dodane przez JS -->
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="admin.js"></script>
+</body>
+
+</html>

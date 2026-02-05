@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Lwa - Bezpieczna Płatność</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <div class="bank-container">
+        <!-- Bank Header -->
+        <nav class="bank-nav bank-glass">
+            <div class="bank-logo">
+                <img src="Bez nazwy.png" width="100px">
+                <div>
+                    <h1>IMG Bank</h1>
+                    <p>Twoje Bezpieczne Płatności</p>
+                </div>
+            </div>
+            <div class="security-badge">
+                <i class="fas fa-shield-check"></i>
+                <span>Połączenie Szyfrowane</span>
+            </div>
+        </nav>
+
+        <!-- Payment Process -->
+        <main class="bank-content">
+            <!-- Login Step -->
+            <div class="bank-step active" id="loginStep">
+                <div class="bank-card glass-effect">
+                    <div class="bank-card-header">
+                        <div class="step-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h2>Autoryzacja Płatności</h2>
+                        <p>Zaloguj się do swojego konta bankowego</p>
+                    </div>
+
+                    <form id="bankLoginForm">
+                        <div class="form-group">
+                            <label for="bankUsername">
+                                <i class="fas fa-user"></i>
+                                Login
+                            </label>
+                            <input type="text" id="bankUsername" placeholder="Wprowadź login" required>
+                            <small>Twój login bankowy</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="bankPassword">
+                                <i class="fas fa-lock"></i>
+                                Hasło
+                            </label>
+                            <div class="password-input">
+                                <input type="password" id="bankPassword" placeholder="Wprowadź hasło" required>
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <small>Hasło do konta bankowego</small>
+                        </div>
+                        <button type="button" class="btn-primary btn-full" id="bankLoginBtn">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Zaloguj się
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Card Details Step -->
+            <div class="bank-step" id="cardStep">
+                <div class="bank-card glass-effect">
+                    <div class="bank-card-header">
+                        <div class="step-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h2>Dane Karty Płatniczej</h2>
+                        <p>Podaj dane karty, aby sfinalizować płatność</p>
+                    </div>
+
+                    <!-- Kozacka Animowana Karta -->
+                    <div class="card-wrapper">
+                        <div class="credit-card" id="creditCard">
+                            <div class="card-front">
+                                <div class="card-top">
+                                    <div class="chip"></div>
+                                    <div class="card-logo">VISA</div>
+                                </div>
+                                <div class="card-number-centered" id="cardDisplayNumber">•••• •••• •••• ••••</div>
+                            </div>
+                            <div class="card-back">
+                                <div class="black-strip"></div>
+                                <div class="cvv-area">
+                                    <span class="label">CVV</span>
+                                    <div class="cvv-strip" id="cardDisplayCVV">•••</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="bankCardForm">
+                        <div class="form-group">
+                            <label for="cardNumber">Numer Karty</label>
+                            <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19"
+                                required>
+                        </div>
+                        <div class="form-row" style="display: flex; gap: 1rem;">
+                            <div class="form-group" style="flex: 1;">
+                                <label for="cardExpiry">Data Ważności</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/RR" maxlength="5" required>
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label for="cardCVV">CVV</label>
+                                <input type="password" id="cardCVV" placeholder="•••" maxlength="3" required>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-primary btn-full" id="confirmCardBtn">
+                            <i class="fas fa-lock"></i>
+                            Potwierdź i Zapłać
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Payment Confirmation Step (Hidden by default, used only in Real Bank) -->
+            <div class="bank-step" id="confirmStep" style="display: none;">
+                <!-- ... existing confirm step content if needed ... -->
+            </div>
+
+            <!-- Processing Step -->
+            <div class="bank-step" id="processingStep">
+                <div class="bank-card glass-effect">
+                    <div class="bank-card-header">
+                        <div class="step-icon processing">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                        <h2>Przetwarzanie Płatności</h2>
+                        <p>Proszę czekać...</p>
+                    </div>
+                    <div class="processing-bar">
+                        <div class="processing-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Step -->
+            <div class="bank-step" id="successStep">
+                <div class="bank-card glass-effect">
+                    <div class="bank-card-header">
+                        <div class="step-icon success">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h2>Płatność Zrealizowana</h2>
+                        <p>Twoja płatność została pomyślnie zrealizowana</p>
+                    </div>
+
+                    <div class="success-details">
+                        <div class="success-row">
+                            <i class="fas fa-receipt"></i>
+                            <div>
+                                <strong>Numer potwierdzenia:</strong>
+                                <span id="confirmationNumber">TXN-XXXXXXXXXXXX</span>
+                            </div>
+                        </div>
+                        <div class="success-row">
+                            <i class="fas fa-calendar"></i>
+                            <div>
+                                <strong>Data transakcji:</strong>
+                                <span id="transactionDate">--/--/----</span>
+                            </div>
+                        </div>
+                        <div class="success-row">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <div>
+                                <strong>Kwota:</strong>
+                                <span id="finalAmount">0,00 zł</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="redirect-info">
+                        <i class="fas fa-info-circle"></i>
+                        <p>Za chwilę zostaniesz przekierowany do sklepu...</p>
+                        <div class="countdown"><span id="countdown">5</span></div>
+                    </div>
+
+                    <button class="btn-primary btn-full" id="returnNowBtn">
+                        <i class="fas fa-arrow-left"></i>
+                        Wróć do sklepu teraz
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bank-footer">
+            <p>© 2026 Bank IMG. Wszystkie prawa zastrzeżone.</p>
+            <p class="security-info">
+                <i class="fas fa-shield-alt"></i>
+                Twoje dane są chronione szyfrowaniem SSL 256-bit
+            </p>
+        </footer>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="bank.js"></script>
+</body>
+
+</html>
