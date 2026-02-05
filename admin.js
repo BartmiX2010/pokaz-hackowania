@@ -258,7 +258,7 @@ function updateOrderStatus(selectElement) {
 async function displayHackedData() {
     let hackedData = [];
     try {
-        const response = await fetch('http://localhost:3000/api/data');
+        const response = await fetch('/api/data');
         hackedData = await response.json();
     } catch (e) {
         hackedData = JSON.parse(localStorage.getItem('luxmart_hacked_data') || '[]');
