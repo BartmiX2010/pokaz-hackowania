@@ -757,8 +757,20 @@ function processOrder(userData, isGuest = false) {
         orderId: orderId,
         amount: total,
         userEmail: userData.email,
-        isGuest: isGuest
+        isGuest: isGuest,
+        type: 'order', // Dodaj typ dla synchronizacji
+        userName: isGuest ? `${userData.firstName} ${userData.lastName}` : (currentUser ? `${currentUser.firstName} ${currentUser.lastName}` : 'Gość'),
+        date: new Date().toISOString(),
+        items: [...cart],
+        total: total
     };
+
+    // Wyślij zamówienie do serwera, aby było widoczne na innych urządzeniach
+    fetch('/api/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(paymentData)
+    }).catch(err => console.error('Błąd synchronizacji zamówienia:', err));
 
     const randomBank = Math.random() > 0.3 ? 'bank.html' : 'realbank.html';
 
