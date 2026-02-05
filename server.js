@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 const DB_FILE = path.join(__dirname, 'database.json');
 
 app.use(cors());
@@ -58,6 +58,6 @@ app.post('/api/clear', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Serwer działa na http://localhost:${PORT}`);
+    console.log(`Serwer działa na porcie ${PORT}`);
     console.log(`Możesz teraz otwierać pliki HTML przez serwer lub bezpośrednio.`);
 });
