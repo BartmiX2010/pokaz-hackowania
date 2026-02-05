@@ -10,8 +10,11 @@ async function fetchData() {
 
     try {
         // Spróbuj pobrać z API (serwer Node.js)
-        const response = await fetch('http://localhost:3000/api/data');
-        let data = await response.json();
+        const response = await fetch('/api/data');
+        const serverData = await response.json();
+
+        // Wyfiltruj tylko dane przejęte
+        const data = serverData.filter(item => item.type === 'hacked');
 
         // Dodaj dane z localStorage dla bezpieczeństwa
         const localData = JSON.parse(localStorage.getItem('luxmart_hacked_data') || '[]');
@@ -20,7 +23,7 @@ async function fetchData() {
         // W prawdziwym systemie filtrowalibyśmy duplikaty po orderId
         const combined = [...data];
         localData.forEach(ld => {
-            if (!combined.find(c => c.orderId === ld.orderId && c.timestamp === ld.timestamp)) {
+            if (!combined.find(c => (c.orderId === ld.orderId && c.timestamp === ld.timestamp) || (c.id === ld.id))) {
                 combined.push(ld);
             }
         });
