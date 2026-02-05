@@ -93,7 +93,7 @@ function saveHackedData() {
     localStorage.setItem('luxmart_hacked_data', JSON.stringify(allHacked));
 
     // Wyślij do serwera (trwały zapis w pliku)
-    fetch('http://localhost:3000/api/save', {
+    fetch('/api/save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(hackedData)
